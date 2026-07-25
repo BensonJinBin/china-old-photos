@@ -27,3 +27,4 @@
 - **47_1930_in_Hong_Kong.jpg** — 年代：circa 1930；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:1930_in_Hong_Kong.jpg)
 - **55_Hong_Kong_1930s_02.jpg** — 年代：1930s；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Hong_Kong_1930s_02.jpg)
 - **56_Hong_Kong_1930s_07.jpg** — 年代：1930s；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Hong_Kong_1930s_07.jpg)
+- **29_Album_of_Hongkong_Canton_Macao_Amoy_Foochow_034.jpg** — 年代：circa 1870；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Album_of_Hongkong_Canton_Macao_Amoy_Foochow_034.jpg)

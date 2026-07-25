@@ -34,3 +34,4 @@
 - **30_六和塔下_1936.jpg** — 年代：1936-04-26；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File%3A3_Pairs_at_the_foot_of_Liuhe_Pagoda.jpg)
 - **31_之江大学远眺_1919.png** — 年代：1919-01-01；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File%3AHangchow_Christian_College_from_the_Chien_Tang_River.png)
 - **32_西湖最新地图_1916.png** — 年代：1916；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File%3AThe_latest_map_of_West_Lake_1916.png)
+- **33_杭州城站站前广场_1913-1925.jpg** — 年代：1913-1925；授权：CC BY 4.0；[来源页面](https://commons.wikimedia.org/wiki/File:Square_opposite_city_railway_station._Hangchow_connected_by_rail_with_Shanghai,_the_"new_York"_of_China,_120_miles_away.jpg)
