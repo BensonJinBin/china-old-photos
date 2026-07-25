@@ -126,6 +126,7 @@ html = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>中国城市老照片 · 1850–1949</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a5b2f'/%3E%3Ctext x='50' y='58' font-size='64' text-anchor='middle' dominant-baseline='middle' fill='%23f5f2ec' font-family='PingFang SC,Hiragino Sans GB,serif'%3E城%3C/text%3E%3C/svg%3E">
 <style>
 :root {
   --bg: #f5f2ec; --card: #fff; --ink: #2b2620; --sub: #8a8074;
@@ -165,11 +166,16 @@ main { flex: 1; min-width: 0; }
 .cap .t { font-size: 13px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.8em; }
 .cap .y { font-size: 12px; color: var(--sub); margin-top: 3px; }
 @media (max-width: 800px) {
+  header { position: static; padding: 10px 16px 8px; }
+  h1 small { display: none; }
   .layout { display: block; }
-  aside { position: static; width: auto; max-height: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 16px 0; }
+  aside { position: static; width: auto; max-height: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 12px 16px 0; }
+  #cq { position: static; flex: 1 1 100%; border: 1px solid var(--line); border-radius: 16px; padding: 5px 12px; background: var(--card); margin: 0 0 2px; }
   .city { border: 1px solid var(--line); border-radius: 16px; padding: 4px 12px; background: var(--card); }
   .grid { padding: 16px; }
 }
+#top { position: fixed; right: 16px; bottom: 28px; width: 42px; height: 42px; border-radius: 50%; background: var(--accent); color: #fff; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; z-index: 20; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+#top.show { display: flex; }
 #lb { position: fixed; inset: 0; background: rgba(10,8,5,.92); display: none; z-index: 100; flex-direction: column; }
 #lb.open { display: flex; }
 #lb .stage { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; padding: 16px; }
@@ -203,6 +209,7 @@ main { flex: 1; min-width: 0; }
   <main><div class="grid" id="grid"></div></main>
 </div>
 
+<div id="top" title="回到顶部">&#8593;</div>
 <div id="lb">
   <span id="close">&times;</span>
   <span class="nav" id="prev">&#10094;</span>
@@ -271,6 +278,9 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') step(-1);
   if (e.key === 'ArrowRight') step(1);
 });
+const topBtn = document.getElementById('top');
+topBtn.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+window.addEventListener('scroll', () => topBtn.classList.toggle('show', window.scrollY > 800), {passive: true});
 document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 document.getElementById('q').addEventListener('input', render);
