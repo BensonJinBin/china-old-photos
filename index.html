@@ -13,6 +13,7 @@
   :root { --bg: #17150f; --card: #221f18; --ink: #ece5d8; --sub: #9a9184; --line: #353026; --accent: #d09758; }
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+img { -webkit-touch-callout: none; -webkit-user-drag: none; user-select: none; }
 body { background: var(--bg); color: var(--ink); font: 15px/1.6 -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif; }
 header { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); padding: 12px 24px 10px; }
 h1 { font-size: 20px; font-weight: 700; letter-spacing: .04em; }
@@ -148,6 +149,8 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') step(-1);
   if (e.key === 'ArrowRight') step(1);
 });
+document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 document.getElementById('q').addEventListener('input', render);
 document.querySelectorAll('.city').forEach(el => el.onclick = () => {
   document.querySelector('.city.on').classList.remove('on');
