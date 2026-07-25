@@ -7,7 +7,7 @@
 <style>
 :root {
   --bg: #f5f2ec; --card: #fff; --ink: #2b2620; --sub: #8a8074;
-  --line: #e3ddd2; --accent: #9a5b2f;
+  --line: #e3ddd2; --accent: #9a5b2f; --hd: 96px;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #17150f; --card: #221f18; --ink: #ece5d8; --sub: #9a9184; --line: #353026; --accent: #d09758; }
@@ -24,13 +24,29 @@ input[type=search]:focus { border-color: var(--accent); }
 .chip { padding: 4px 12px; border: 1px solid var(--line); border-radius: 20px; background: var(--card); color: var(--sub); font-size: 13px; cursor: pointer; user-select: none; white-space: nowrap; }
 .chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
 .count { color: var(--sub); font-size: 13px; margin-left: auto; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; padding: 20px 24px 60px; }
+.layout { display: flex; align-items: flex-start; }
+aside { width: 170px; flex-shrink: 0; position: sticky; top: var(--hd); max-height: calc(100vh - var(--hd)); overflow-y: auto; padding: 0 8px 40px 16px; }
+#cq { position: sticky; top: 0; z-index: 2; width: 100%; margin: 0 0 8px; padding: 14px 12px 6px; border: none; border-bottom: 1px solid var(--line); background: var(--bg); color: var(--ink); font-size: 13px; outline: none; }
+#cq::placeholder { color: var(--sub); }
+.city { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 5px 12px; border-radius: 8px; cursor: pointer; color: var(--ink); font-size: 14px; user-select: none; }
+.city:hover { background: var(--card); }
+.city .n { color: var(--sub); font-size: 12px; }
+.city.on { background: var(--accent); color: #fff; }
+.city.on .n { color: rgba(255,255,255,.85); }
+main { flex: 1; min-width: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; padding: 20px 24px 60px 12px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; cursor: zoom-in; transition: transform .12s ease; }
 .card:hover { transform: translateY(-2px); }
 .card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: #d8d2c6; }
 .cap { padding: 8px 10px 10px; }
 .cap .t { font-size: 13px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.8em; }
 .cap .y { font-size: 12px; color: var(--sub); margin-top: 3px; }
+@media (max-width: 800px) {
+  .layout { display: block; }
+  aside { position: static; width: auto; max-height: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 16px 0; }
+  .city { border: 1px solid var(--line); border-radius: 16px; padding: 4px 12px; background: var(--card); }
+  .grid { padding: 16px; }
+}
 #lb { position: fixed; inset: 0; background: rgba(10,8,5,.92); display: none; z-index: 100; flex-direction: column; }
 #lb.open { display: flex; }
 #lb .stage { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; padding: 16px; }
@@ -48,11 +64,6 @@ input[type=search]:focus { border-color: var(--accent); }
 <header>
   <h1>中国城市老照片<small>清末民国 · 18 城 1447 张 · 杜克甘博档案 + 维基共享馆藏</small></h1>
   <div class="bar">
-    <span class="lab">城市</span>
-    <span class="chip c on" data-c="全部">全部</span>
-    <span class="chip c" data-c="hangzhou">杭州 369</span><span class="chip c" data-c="beijing">北京 150</span><span class="chip c" data-c="shanghai">上海 114</span><span class="chip c" data-c="nanjing">南京 68</span><span class="chip c" data-c="suzhou">苏州 16</span><span class="chip c" data-c="tianjin">天津 122</span><span class="chip c" data-c="qingdao">青岛 21</span><span class="chip c" data-c="kaifeng">开封 68</span><span class="chip c" data-c="wuhan">武汉 15</span><span class="chip c" data-c="xian">西安 3</span><span class="chip c" data-c="chengdu">成都 191</span><span class="chip c" data-c="chongqing">重庆 142</span><span class="chip c" data-c="guangzhou">广州 58</span><span class="chip c" data-c="fuzhou">福州 33</span><span class="chip c" data-c="harbin">哈尔滨 25</span><span class="chip c" data-c="shenyang">沈阳 26</span><span class="chip c" data-c="taizhou">台州 5</span><span class="chip c" data-c="macau">澳门 21</span>
-  </div>
-  <div class="bar">
     <span class="lab">年代</span>
     <span class="chip e on" data-e="全部">全部</span>
     <span class="chip e" data-e="1850–99">1850–99</span>
@@ -64,7 +75,10 @@ input[type=search]:focus { border-color: var(--accent); }
     <span class="count" id="count"></span>
   </div>
 </header>
-<div class="grid" id="grid"></div>
+<div class="layout">
+  <aside id="cities"><input type="search" id="cq" placeholder="过滤城市（中文或拼音）"><div class="city on" data-c="全部"><span>全部</span><span class="n">1447</span></div><div class="city" data-c="hangzhou"><span>杭州</span><span class="n">369</span></div><div class="city" data-c="chengdu"><span>成都</span><span class="n">191</span></div><div class="city" data-c="beijing"><span>北京</span><span class="n">150</span></div><div class="city" data-c="chongqing"><span>重庆</span><span class="n">142</span></div><div class="city" data-c="tianjin"><span>天津</span><span class="n">122</span></div><div class="city" data-c="shanghai"><span>上海</span><span class="n">114</span></div><div class="city" data-c="kaifeng"><span>开封</span><span class="n">68</span></div><div class="city" data-c="nanjing"><span>南京</span><span class="n">68</span></div><div class="city" data-c="guangzhou"><span>广州</span><span class="n">58</span></div><div class="city" data-c="fuzhou"><span>福州</span><span class="n">33</span></div><div class="city" data-c="shenyang"><span>沈阳</span><span class="n">26</span></div><div class="city" data-c="harbin"><span>哈尔滨</span><span class="n">25</span></div><div class="city" data-c="macau"><span>澳门</span><span class="n">21</span></div><div class="city" data-c="qingdao"><span>青岛</span><span class="n">21</span></div><div class="city" data-c="suzhou"><span>苏州</span><span class="n">16</span></div><div class="city" data-c="wuhan"><span>武汉</span><span class="n">15</span></div><div class="city" data-c="taizhou"><span>台州</span><span class="n">5</span></div><div class="city" data-c="xian"><span>西安</span><span class="n">3</span></div></aside>
+  <main><div class="grid" id="grid"></div></main>
+</div>
 
 <div id="lb">
   <span id="close">&times;</span>
@@ -81,11 +95,11 @@ const grid = document.getElementById('grid'), count = document.getElementById('c
 let shown = [];
 
 function enc(p) { return p.split('/').map(encodeURIComponent).join('/'); }
-function sel(cls) { return document.querySelector('.chip.' + cls + '.on').dataset; }
 
 function render() {
   const q = document.getElementById('q').value.trim().toLowerCase();
-  const c = sel('c').c, e = sel('e').e;
+  const c = document.querySelector('.city.on').dataset.c;
+  const e = document.querySelector('.chip.e.on').dataset.e;
   shown = ITEMS.filter(it =>
     (c === '全部' || it.city === c) &&
     (e === '全部' || it.e === e) &&
@@ -96,6 +110,7 @@ function render() {
       <div class="cap"><div class="t">${it.t}</div><div class="y">${ZH[it.city]} · ${it.y} · ${it.s}</div></div>
     </div>`).join('');
   count.textContent = shown.length + ' / ' + ITEMS.length + ' 张';
+  window.scrollTo({top: 0});
 }
 
 let cur = 0;
@@ -119,9 +134,20 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') step(1);
 });
 document.getElementById('q').addEventListener('input', render);
-document.querySelectorAll('.chip').forEach(ch => ch.onclick = () => {
-  const cls = ch.classList.contains('c') ? 'c' : 'e';
-  document.querySelector('.chip.' + cls + '.on').classList.remove('on');
+document.querySelectorAll('.city').forEach(el => el.onclick = () => {
+  document.querySelector('.city.on').classList.remove('on');
+  el.classList.add('on'); render();
+});
+document.getElementById('cq').addEventListener('input', e => {
+  const v = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('.city').forEach(el => {
+    const slug = el.dataset.c, zh = el.textContent;
+    const hit = slug === '全部' || !v || zh.toLowerCase().includes(v) || slug.includes(v);
+    el.style.display = hit ? '' : 'none';
+  });
+});
+document.querySelectorAll('.chip.e').forEach(ch => ch.onclick = () => {
+  document.querySelector('.chip.e.on').classList.remove('on');
   ch.classList.add('on'); render();
 });
 render();
