@@ -1,0 +1,25 @@
+# 青岛老照片（维基共享）
+
+来源：Wikimedia Commons，按 1850–1949 拍摄年代与公版/CC0/CC BY 授权自动筛选。
+
+- **09_Blick_auf_Tsingtau_vom_Artillerielager_aus_Tsingtau_Kiautschou.jpg** — 年代：4 April 2010 (original upload date) Phot；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Blick_auf_Tsingtau_vom_Artillerielager_aus_Tsingtau_Kiautschou.jpg)
+- **10_Bundesarchiv_Bild_134-B2340_Tsingtau_Gouvernements-Schule.jpg** — 年代：1910；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_134-B2340,_Tsingtau,_Gouvernements-Schule.jpg)
+- **11_Bundesarchiv_Bild_137-005610_Tsingtau_Gebäude_der_Hamburg-Amerika-Lini.jpg** — 年代：1867；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_137-005610,_Tsingtau,_Gebäude_der_Hamburg-Amerika-Linie.jpg)
+- **12_Bundesarchiv_Bild_146-1982-173-11A_Tsingtau_Gebäude_des_Tsingtau-Club.jpg** — 年代：23 September 1912；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_146-1982-173-11A,_Tsingtau,_Gebäude_des_Tsingtau-Club.jpg)
+- **13_Diederichsstein_Tsingtau_02.jpg** — 年代：1910s；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Diederichsstein_Tsingtau_02.jpg)
+- **21_Dorfstrasse_in_Tsingtau_(1898).jpg** — 年代：1898；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Dorfstrasse_in_Tsingtau_(1898).jpg)
+- **22_Faberkrankenhaus_Tsingtau.jpg** — 年代：1900s；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Faberkrankenhaus,_Tsingtau.jpg)
+- **23_Lazarettverwaltung_Tsingtau.png** — 年代：between 1901 and 1902；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Lazarettverwaltung_Tsingtau.png)
+- **24_Tsingtau_1901.jpg** — 年代：1901；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Tsingtau_1901.jpg)
+- **25_Tsingtau_1938.jpg** — 年代：1938；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Tsingtau_1938.JPG)
+- **26_Tsingtau_Gouvernements-Lazarett_(1910).jpg** — 年代：1910；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Tsingtau_Gouvernements-Lazarett_(1910).jpg)
+- **27_Tsingtau_Hohenloheweg_(1911).jpg** — 年代：1911；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Tsingtau_Hohenloheweg_(1911).jpg)
+- **28_Tsingtau_école_de_garçons_du_gouvernorat_allemand.jpg** — 年代：Taken in 1904；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Tsingtau_école_de_garçons_du_gouvernorat_allemand.jpg)
+- **29_青岛皇家督署小学_Gouvernement_Schule_Tsingtau.jpg** — 年代：1910s；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:青岛皇家督署小学_Gouvernement_Schule_Tsingtau.jpg)
+- **31_British_Indian_and_Japanese_soldiers_in_Tsingtao_(Qingdao)_China_1914.jpg** — 年代：1914；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:British,_Indian_and_Japanese_soldiers_in_Tsingtao_(Qingdao),_China,_1914.jpg)
+- **32_Bundesarchiv_Bild_116-127-028_Tsingtau_Tempel.jpg** — 年代：1898；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_116-127-028,_Tsingtau,_Tempel.jpg)
+- **34_Bundesarchiv_Bild_137-000688_China_Tsingtau_Marktszene.jpg** — 年代：1900；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_137-000688,_China,_Tsingtau,_Marktszene.jpg)
+- **35_Bundesarchiv_Bild_137-005518_Tsingtau_Gouvernementsgebäude.jpg** — 年代：1867；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_137-005518,_Tsingtau,_Gouvernementsgebäude.jpg)
+- **36_Bundesarchiv_Bild_137-031735_Tsingtau_Teilansicht.jpg** — 年代：1930；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_137-031735,_Tsingtau,_Teilansicht.jpg)
+- **37_Bundesarchiv_Bild_137-031736_Tsingtau_Teilansicht.jpg** — 年代：1930；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_137-031736,_Tsingtau,_Teilansicht.jpg)
+- **18_Bundesarchiv_Bild_116-125-01_Tsingtau_Haupttor_des_Artillerielagers.jpg** — 年代：1898；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_116-125-01,_Tsingtau,_Haupttor_des_Artillerielagers.jpg)
