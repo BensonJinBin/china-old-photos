@@ -8,7 +8,7 @@ BASE = os.path.dirname(SCRATCH)
 CITY_ZH = {"hangzhou":"杭州","beijing":"北京","chengdu":"成都","chongqing":"重庆",
   "tianjin":"天津","shanghai":"上海","kaifeng":"开封","nanjing":"南京",
   "guangzhou":"广州","fuzhou":"福州","macau":"澳门","suzhou":"苏州","wuhan":"武汉",
-  "xian":"西安","qingdao":"青岛","harbin":"哈尔滨","shenyang":"沈阳","taizhou":"台州"}
+  "xian":"西安","qingdao":"青岛","harbin":"哈尔滨","shenyang":"沈阳","taizhou":"台州","hongkong":"香港"}
 
 items = []
 

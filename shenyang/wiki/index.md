@@ -28,3 +28,4 @@
 - **29_SMR_Park_Mukden_2.jpg** — 年代：circa 1930；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:S.M.R._Park,_Mukden_2.jpg)
 - **30_奉天の美観.jpg** — 年代：1938；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:奉天の美観.jpg)
 - **31_Chosen_Bank_Mukden_branch.jpg** — 年代：before 1945；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Chosen_Bank_Mukden_branch.jpg)
+- **59_Naniwa_Street_1930_(Shenyang).png** — 年代：1930；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Naniwa_Street_1930_(Shenyang).png)
