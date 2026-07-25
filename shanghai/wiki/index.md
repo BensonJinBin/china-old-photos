@@ -41,3 +41,5 @@
 - **38_Einzug_der_deutschen_Truppen_in_Shanghai_am_6_September_1900_3.jpg** — 年代：before 1904；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Einzug_der_deutschen_Truppen_in_Shanghai_am_6._September_1900_3.jpg)
 - **39_Einzug_der_deutschen_Truppen_in_Shanghai_am_6_September_1900_4.jpg** — 年代：before 1904；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Einzug_der_deutschen_Truppen_in_Shanghai_am_6._September_1900_4.jpg)
 - **40_Einzug_der_deutschen_Truppen_in_Shanghai_am_6_September_1900_5.jpg** — 年代：before 1904；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Einzug_der_deutschen_Truppen_in_Shanghai_am_6._September_1900_5.jpg)
+- **29_The_Auditorium_of_Jinan_University_Zhenru_Campus_in_1923-1937.jpg** — 年代：between 1923 and 1937；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:The_Auditorium_of_Jinan_University_Zhenru_Campus_in_1923-1937.jpg)
+- **30_The_School_Gate_of_Jinan_University_Zhenru_Campus_in_1923-1937.jpg** — 年代：between 1923 and 1937；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:The_School_Gate_of_Jinan_University_Zhenru_Campus_in_1923-1937.jpg)
