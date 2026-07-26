@@ -234,7 +234,7 @@ footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-si
 <img src="assets/share.jpg" alt="" style="display:none">
 <header>
   <h1>中国城市老照片<small>__SUBTITLE__</small></h1>
-  <span class="ab-link" id="ab-top" onclick="openAb()">关于作者</span>
+  <span class="ab-link" id="ab-top" onclick="openAb()">关于作者 &#9749;</span>
   <div class="bar">
     <span class="lab">年代</span>
     <span class="chip e on" data-e="全部">全部</span>
