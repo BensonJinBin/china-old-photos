@@ -15,6 +15,14 @@ CITY_ZH = {"hangzhou":"杭州","beijing":"北京","chengdu":"成都","chongqing"
 EXCLUDE = {
     "wuhan/wiki/13_Beheaded_revolutionists_in_Wuchang.jpg",
     "shanghai/wiki/34_Chinesischer_Photograph_um_1904_-_Hinrichtung_im_alten_Shanghai_(Zeno_.jpg",
+    # 采集噪音：拍摄地不属本站收录的 24 城
+    "wuhan/wiki/38_Battle_of_Siping04.jpg",              # 四平（吉林），且为 1946 年战场照
+    "chongqing/gamble/gamble_035B_0372_Yichang_Customs_Station.jpg",  # 宜昌（湖北）
+}
+
+# 城市改判：当初自动采集分错了柜子，仅改展示归属，原始采集记录不动。
+REASSIGN = {
+    "wuhan/wiki/40_Bundesarchiv_Bild_134-A299_Tsingtau_Erste_deutsche_Bäckerei.jpg": "qingdao",
 }
 
 items = []
@@ -75,7 +83,13 @@ if os.path.exists(cc_file):
 
 n_before = len(items)
 items = [it for it in items if it["dir"] + it["f"] not in EXCLUDE]
-print(f"total items: {len(items)} (页面排除 {n_before - len(items)}/{len(EXCLUDE)} 条)")
+n_re = 0
+for it in items:
+    city = REASSIGN.get(it["dir"] + it["f"])
+    if city:
+        it["city"] = city
+        n_re += 1
+print(f"total items: {len(items)} (页面排除 {n_before - len(items)}/{len(EXCLUDE)} 条, 改判 {n_re}/{len(REASSIGN)} 条)")
 
 # 4.5 中文标题（外挂映射，不改任何原始元数据；缺失则回退英文原题）
 tz_file = f"{SCRATCH}/titles_zh.json"
