@@ -308,7 +308,7 @@ document.getElementById('lucky').onclick = () => {
 fetch('https://jinbin.goatcounter.com/counter/TOTAL.json')
   .then(r => r.ok ? r.json() : Promise.reject())
   .then(d => {
-    const n = parseInt(String(d.count).replace(/[^0-9]/g, ''), 10);
+    const n = parseInt(String(d.count_unique || d.count).replace(/[^0-9]/g, ''), 10);
     if (n) {
       document.getElementById('pvn').textContent = n.toLocaleString();
       document.getElementById('pv').style.display = 'inline';
