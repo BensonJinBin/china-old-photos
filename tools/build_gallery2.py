@@ -10,6 +10,13 @@ CITY_ZH = {"hangzhou":"杭州","beijing":"北京","chengdu":"成都","chongqing"
   "guangzhou":"广州","fuzhou":"福州","macau":"澳门","suzhou":"苏州","wuhan":"武汉",
   "xian":"西安","qingdao":"青岛","harbin":"哈尔滨","shenyang":"沈阳","taizhou":"台州","hongkong":"香港","dalian":"大连","xiamen":"厦门","ningbo":"宁波","kunming":"昆明","jinan":"济南"}
 
+# 页面排除清单：血腥画面不适合在随手浏览的图集里平铺出现（网格、灯箱、搜索、随便看看都不透出）。
+# 仅作展示层过滤——原图与馆藏溯源记录（index.md）照旧保留，不是对史料价值的否定。
+EXCLUDE = {
+    "wuhan/wiki/13_Beheaded_revolutionists_in_Wuchang.jpg",
+    "shanghai/wiki/34_Chinesischer_Photograph_um_1904_-_Hinrichtung_im_alten_Shanghai_(Zeno_.jpg",
+}
+
 items = []
 
 def era(datestr):
@@ -66,7 +73,9 @@ if os.path.exists(cc_file):
             items.append({"city":city,"f":it["file"],"dir":f"{city}/wiki/","t":name[:110],
                           "y":it["date"],"e":era(it["date"]),"lic":it["lic"],"src":page,"s":"维基"})
 
-print("total items:", len(items))
+n_before = len(items)
+items = [it for it in items if it["dir"] + it["f"] not in EXCLUDE]
+print(f"total items: {len(items)} (页面排除 {n_before - len(items)}/{len(EXCLUDE)} 条)")
 
 # 4.5 中文标题（外挂映射，不改任何原始元数据；缺失则回退英文原题）
 tz_file = f"{SCRATCH}/titles_zh.json"
