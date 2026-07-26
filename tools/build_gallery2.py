@@ -68,6 +68,18 @@ if os.path.exists(cc_file):
 
 print("total items:", len(items))
 
+# 4.5 中文标题（外挂映射，不改任何原始元数据；缺失则回退英文原题）
+tz_file = f"{SCRATCH}/titles_zh.json"
+if os.path.exists(tz_file):
+    tz = {k: v for k, v in json.load(open(tz_file)).items() if not k.startswith("_")}
+    hit = 0
+    for it in items:
+        zh = tz.get(it["dir"] + it["f"])
+        if zh:
+            it["tz"] = zh
+            hit += 1
+    print(f"中文标题: {hit}/{len(items)}")
+
 # 5. thumbnails for any file lacking one
 made = 0
 for it in items:
@@ -197,6 +209,7 @@ main { flex: 1; min-width: 0; }
 #lb img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
 #lb .info { color: #d8d0c2; text-align: center; padding: 0 60px 18px; font-size: 14px; }
 #lb .info a { color: #e8b478; }
+#lb .info .orig { color: #9a9184; font-size: 12.5px; }
 #lb .nav { position: fixed; top: 50%; transform: translateY(-50%); font-size: 34px; color: #cbc2b2; cursor: pointer; padding: 20px 16px; user-select: none; }
 #lb .nav:hover { color: #fff; }
 #prev { left: 4px; } #next { right: 4px; }
@@ -320,13 +333,13 @@ function render() {
     if (c !== '全部' && it.city !== c) return false;
     if (e !== '全部' && it.e !== e) return false;
     if (!q) return true;
-    const hay = (it.t + ' ' + it.f + ' ' + it.y + ' ' + ZH[it.city]).toLowerCase();
+    const hay = (it.t + ' ' + (it.tz || '') + ' ' + it.f + ' ' + it.y + ' ' + ZH[it.city]).toLowerCase();
     return terms.some(t => hay.includes(t));
   });
   grid.innerHTML = shown.map((it, i) => `
     <div class="card" onclick="openLb(${i})">
       <img src="${enc(it.th)}" loading="lazy" alt="">
-      <div class="cap"><div class="t">${it.t}</div><div class="y">${ZH[it.city]} · ${it.y} · ${it.s}</div></div>
+      <div class="cap"><div class="t">${it.tz || it.t}</div><div class="y">${ZH[it.city]} · ${it.y} · ${it.s}</div></div>
     </div>`).join('');
   count.textContent = shown.length + ' / ' + ITEMS.length + ' 张';
   updateHash();
@@ -349,7 +362,7 @@ function show() {
     if (n && n !== it) (new Image()).src = enc(n.dir + n.f);
   }
   document.getElementById('lbinfo').innerHTML =
-    `${ZH[it.city]} · ${it.t} &nbsp;·&nbsp; ${it.y} &nbsp;·&nbsp; ${it.lic} &nbsp;·&nbsp; <a href="${it.src}" target="_blank">馆藏来源</a> &nbsp;(${cur + 1}/${shown.length})`;
+    `${ZH[it.city]} · ${it.tz || it.t}${it.tz ? ' <span class="orig">' + it.t + '</span>' : ''} &nbsp;·&nbsp; ${it.y} &nbsp;·&nbsp; ${it.lic} &nbsp;·&nbsp; <a href="${it.src}" target="_blank">馆藏来源</a> &nbsp;(${cur + 1}/${shown.length})`;
   updateHash();
 }
 function step(d) { cur = (cur + d + shown.length) % shown.length; show(); }
