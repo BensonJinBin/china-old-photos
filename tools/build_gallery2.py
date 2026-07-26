@@ -20,11 +20,6 @@ EXCLUDE = {
     "chongqing/gamble/gamble_035B_0372_Yichang_Customs_Station.jpg",  # 宜昌（湖北）
 }
 
-# 城市改判：当初自动采集分错了柜子，仅改展示归属，原始采集记录不动。
-REASSIGN = {
-    "wuhan/wiki/40_Bundesarchiv_Bild_134-A299_Tsingtau_Erste_deutsche_Bäckerei.jpg": "qingdao",
-}
-
 items = []
 
 def era(datestr):
@@ -83,13 +78,7 @@ if os.path.exists(cc_file):
 
 n_before = len(items)
 items = [it for it in items if it["dir"] + it["f"] not in EXCLUDE]
-n_re = 0
-for it in items:
-    city = REASSIGN.get(it["dir"] + it["f"])
-    if city:
-        it["city"] = city
-        n_re += 1
-print(f"total items: {len(items)} (页面排除 {n_before - len(items)}/{len(EXCLUDE)} 条, 改判 {n_re}/{len(REASSIGN)} 条)")
+print(f"total items: {len(items)} (页面排除 {n_before - len(items)}/{len(EXCLUDE)} 条)")
 
 # 4.5 中文标题（外挂映射，不改任何原始元数据；缺失则回退英文原题）
 tz_file = f"{SCRATCH}/titles_zh.json"

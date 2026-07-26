@@ -23,3 +23,4 @@
 - **36_Bundesarchiv_Bild_137-031735_Tsingtau_Teilansicht.jpg** — 年代：1930；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_137-031735,_Tsingtau,_Teilansicht.jpg)
 - **37_Bundesarchiv_Bild_137-031736_Tsingtau_Teilansicht.jpg** — 年代：1930；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_137-031736,_Tsingtau,_Teilansicht.jpg)
 - **18_Bundesarchiv_Bild_116-125-01_Tsingtau_Haupttor_des_Artillerielagers.jpg** — 年代：1898；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_116-125-01,_Tsingtau,_Haupttor_des_Artillerielagers.jpg)
+- **38_Bundesarchiv_Bild_134-A299_Tsingtau_Erste_deutsche_Bäckerei.jpg** — 年代：1899；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_134-A299,_Tsingtau,_Erste_deutsche_Bäckerei.jpg)
