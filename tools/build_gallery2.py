@@ -243,6 +243,7 @@ footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-si
     <span class="chip e" data-e="1920–29">1920–29</span>
     <span class="chip e" data-e="1930–49">1930–49</span>
     <input type="search" id="q" placeholder="搜索：宝塔 / 城门 / 寺庙 / 街景 / 西湖 …">
+    <span class="chip" id="lucky" title="随机看一张">&#127922; 随便看看</span>
     <span class="count" id="count"></span>
   </div>
 </header>
@@ -422,6 +423,9 @@ function applyHash() {
   return parseInt(h.get('p'));
 }
 const p0 = applyHash();
+document.getElementById('lucky').onclick = () => {
+  if (shown.length) openLb(Math.floor(Math.random() * shown.length));
+};
 render();
 if (!isNaN(p0) && ITEMS[p0]) {
   let idx = shown.indexOf(ITEMS[p0]);
@@ -437,6 +441,7 @@ if (!isNaN(p0) && ITEMS[p0]) {
   if (idx >= 0) openLb(idx);
 }
 </script>
+<script data-goatcounter="https://jinbin.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
 """
