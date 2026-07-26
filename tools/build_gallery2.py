@@ -327,7 +327,7 @@ function render() {
   let terms = [];
   if (q) {
     terms = [q];
-    for (const [zh, en] of KW) if (q.includes(zh)) terms.push(...en.split(' '));
+    for (const [zh, en] of KW) if (q === zh) terms.push(...en.split(' '));
   }
   shown = ITEMS.filter(it => {
     if (c !== '全部' && it.city !== c) return false;
