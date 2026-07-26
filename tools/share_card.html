@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  background: #f5f2ec;
+  font-family: "Songti SC", "Noto Serif SC", "PingFang SC", serif;
+  color: #2b2620;
+  display: flex; flex-direction: column;
+  padding: 52px 56px 44px;
+}
+.head { text-align: center; margin-bottom: 34px; }
+.seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; border-radius: 14px; background: #9a5b2f;
+  color: #f5f2ec; font-size: 40px; font-weight: 700; margin-bottom: 16px;
+}
+h1 { font-size: 58px; font-weight: 900; letter-spacing: .08em; }
+.sub {
+  margin-top: 12px; font-size: 26px; color: #8a8074; letter-spacing: .06em;
+  font-family: "PingFang SC", sans-serif;
+}
+.grid {
+  flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr; gap: 18px;
+}
+.cell {
+  position: relative; min-height: 0; min-width: 0; border-radius: 12px; overflow: hidden;
+  border: 1px solid #e3ddd2; background: #d8d2c6;
+}
+.cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.tag {
+  position: absolute; left: 12px; bottom: 12px;
+  background: rgba(43,38,32,.72); color: #f5f2ec;
+  font-size: 24px; padding: 5px 18px; border-radius: 18px;
+  font-family: "PingFang SC", sans-serif; letter-spacing: .05em;
+}
+.foot {
+  margin-top: 34px; text-align: center;
+  font-family: "PingFang SC", sans-serif;
+}
+.url {
+  display: inline-block; background: #9a5b2f; color: #f5f2ec;
+  font-size: 28px; padding: 14px 38px; border-radius: 32px; letter-spacing: .02em;
+}
+.hint { margin-top: 14px; font-size: 22px; color: #8a8074; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<div class="head">
+  <div class="seal">城</div>
+  <h1>中国城市老照片</h1>
+  <div class="sub">1850–1949 · 清末民国 · 24 城 2041 张公有领域馆藏</div>
+</div>
+<div class="grid">
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/beijing/gamble/gamble_044B_0462_Forbidden_City_Gate.jpg" style="transform:scale(1.08)"><span class="tag">北京 · 紫禁城</span></div>
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/hangzhou/wiki/02_雷峰塔_1910.jpg" style="object-position:50% 18%"><span class="tag">杭州 · 雷峰塔</span></div>
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/shanghai/wiki/16_Nanking_Road_Shanghai_c_1930s.jpg"><span class="tag">上海 · 南京路</span></div>
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/hongkong/wiki/06_HK_JunksSampans_c1900s.jpg"><span class="tag">香港 · 维多利亚港</span></div>
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/guangzhou/wiki/17_Five-Story_Pagoda_in_the_1890s.jpg"><span class="tag">广州 · 镇海楼</span></div>
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/chengdu/gamble/gamble_011B_0109_Inside_Imperial_City_Gate.jpg" style="transform:scale(1.14)"><span class="tag">成都 · 皇城门</span></div>
+</div>
+<div class="foot">
+  <div class="url">bensonjinbin.github.io/china-old-photos</div>
+  <div class="hint">按城市 · 年代 · 关键词浏览 &nbsp;|&nbsp; 杜克甘博档案 + 维基共享馆藏</div>
+</div>
+</body>
+</html>
