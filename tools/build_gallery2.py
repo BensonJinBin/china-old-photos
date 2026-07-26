@@ -373,4 +373,5 @@ subtitle = f"清末民国 · {len(present)} 城 {len(items)} 张 · 杜克甘博
 html = (html.replace("__DATA__", data_js).replace("__ZH__", zh_js)
             .replace("__CITY_ROWS__", city_rows).replace("__SUBTITLE__", subtitle))
 open(f"{BASE}/gallery.html", "w").write(html)
-print("gallery.html written:", len(html)//1024, "KB |", len(present), "cities, sidebar layout")
+open(f"{BASE}/index.html", "w").write(html)
+print("gallery.html + index.html written:", len(html)//1024, "KB |", len(present), "cities, sidebar layout")
