@@ -16,4 +16,3 @@
 - **32_1927_Hankow_USS_Palos_Landing_Party_2.jpg** — 年代：1920-01-01；授权：CC BY-SA 4.0；[来源页面](https://commons.wikimedia.org/wiki/File:1927_Hankow_USS_Palos_Landing_Party_2.jpg)
 - **38_Battle_of_Siping04.jpg** — 年代：1946；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Battle_of_Siping04.jpg)
 - **39_Boat_sailing_before_a_terraced_islet_China_ca1917-1923_(IMP-YDS-RG224-.jpg** — 年代：1920/1940；授权：Public domain；[来源页面](https://commons.wikimedia.org/wiki/File:Boat_sailing_before_a_terraced_islet,_China,_ca.1917-1923_(IMP-YDS-RG224-OV1-0000-0013).jpg)
-- **40_Bundesarchiv_Bild_134-A299_Tsingtau_Erste_deutsche_Bäckerei.jpg** — 年代：1899；授权：CC BY-SA 3.0 de；[来源页面](https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_134-A299,_Tsingtau,_Erste_deutsche_Bäckerei.jpg)
