@@ -15,9 +15,12 @@ CITY_ZH = {"hangzhou":"杭州","beijing":"北京","chengdu":"成都","chongqing"
 EXCLUDE = {
     "wuhan/wiki/13_Beheaded_revolutionists_in_Wuchang.jpg",
     "shanghai/wiki/34_Chinesischer_Photograph_um_1904_-_Hinrichtung_im_alten_Shanghai_(Zeno_.jpg",
-    # 采集噪音：拍摄地不属本站收录的 24 城
+    # 采集噪音：拍摄地不属本站收录的 24 城（由 tools/harvest_commons.py --audit 查出）
     "wuhan/wiki/38_Battle_of_Siping04.jpg",              # 四平（吉林），且为 1946 年战场照
     "chongqing/gamble/gamble_035B_0372_Yichang_Customs_Station.jpg",  # 宜昌（湖北）
+    "wuhan/wiki/39_Boat_sailing_before_a_terraced_islet_China_ca1917-1923_(IMP-YDS-RG224-.jpg",  # 小孤山（江西）
+    # 题材不符：棚拍人像，非城市影像
+    "xiamen/wiki/39_Portrait_of_Donald_Morphett_Mars_Ross_ships_surgeon.jpg",
 }
 
 items = []
