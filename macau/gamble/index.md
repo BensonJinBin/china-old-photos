@@ -1,0 +1,25 @@
+# 甘博（Sidney D. Gamble）澳门照片集
+
+来源：杜克大学图书馆 Sidney D. Gamble Photographs 数字馆藏，原始分辨率。馆方声明无已知版权限制。
+
+- **RL_10074_LS_0354_Untitled_lantern_slide.jpg** — 1918 — [Untitled lantern slide](https://repository.duke.edu/dc/gamble/RL_10074_LS_0354)
+- **RL_10074_LS_0355_Untitled_lantern_slide.jpg** — 1918 — [Untitled lantern slide](https://repository.duke.edu/dc/gamble/RL_10074_LS_0355)
+- **RL_10074_LS_0417_Untitled_lantern_slide.jpg** — 1918 — [Untitled lantern slide](https://repository.duke.edu/dc/gamble/RL_10074_LS_0417)
+- **gamble_048B_0506_Rice_Boat.jpg** — 1918 — [Rice Boat](https://repository.duke.edu/dc/gamble/gamble_048B_0506)
+- **gamble_048B_0507_Slipper_Boat.jpg** — 1918 — [Slipper Boat](https://repository.duke.edu/dc/gamble/gamble_048B_0507)
+- **gamble_048B_0510_Morrison_Graves.jpg** — 1918 — [Morrison Graves](https://repository.duke.edu/dc/gamble/gamble_048B_0510)
+- **gamble_048B_0511_Morrison_Grave.jpg** — 1918 — [Morrison Grave](https://repository.duke.edu/dc/gamble/gamble_048B_0511)
+- **gamble_048B_0512_House_without_Roof.jpg** — 1918 — [House without Roof](https://repository.duke.edu/dc/gamble/gamble_048B_0512)
+- **gamble_048B_0515_Page_Foster.jpg** — 1918 — [Page & Foster](https://repository.duke.edu/dc/gamble/gamble_048B_0515)
+- **gamble_149A_836_Nepalese_men.jpg** — 1918 — [Nepalese  men](https://repository.duke.edu/dc/gamble/gamble_149A_836)
+- **gamble_149A_837_Nepalese_men.jpg** — 1918 — [Nepalese men](https://repository.duke.edu/dc/gamble/gamble_149A_837)
+- **gamble_149A_838_S_S_Day.jpg** — 1918 — [S S Day](https://repository.duke.edu/dc/gamble/gamble_149A_838)
+- **gamble_149A_839_Morrison_Grave.jpg** — 1918 — [Morrison Grave](https://repository.duke.edu/dc/gamble/gamble_149A_839)
+- **gamble_149A_839a_Morrison_Grave.jpg** — 1918 — [Morrison Grave](https://repository.duke.edu/dc/gamble/gamble_149A_839a)
+- **gamble_149A_840_Portuguese_House.jpg** — 1918 — [Portuguese House](https://repository.duke.edu/dc/gamble/gamble_149A_840)
+- **gamble_150A_841_Forts.jpg** — 1918 — [Forts](https://repository.duke.edu/dc/gamble/gamble_150A_841)
+- **gamble_150A_842_Fishing_Boats.jpg** — 1918 — [Fishing Boats](https://repository.duke.edu/dc/gamble/gamble_150A_842)
+- **gamble_150A_843_Gambling_Street.jpg** — 1918 — [Gambling Street](https://repository.duke.edu/dc/gamble/gamble_150A_843)
+- **gamble_150A_844_Luis_de_Camoes_Poets_Grotto.jpg** — 1918 — [Luis de Camoes, Poets Grotto](https://repository.duke.edu/dc/gamble/gamble_150A_844)
+- **gamble_150A_845_Church_Front.jpg** — 1918 — [Church Front](https://repository.duke.edu/dc/gamble/gamble_150A_845)
+- **gamble_150A_846_Praying_-_Earth_Shrine.jpg** — 1918 — [Praying - Earth Shrine](https://repository.duke.edu/dc/gamble/gamble_150A_846)

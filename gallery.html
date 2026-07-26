@@ -44,8 +44,9 @@ main { flex: 1; min-width: 0; }
 .cap .t { font-size: 13px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.8em; }
 .cap .y { font-size: 12px; color: var(--sub); margin-top: 3px; }
 @media (max-width: 800px) {
-  header { position: static; padding: 10px 16px 8px; }
+  header { position: relative; padding: 10px 16px 8px; }
   h1 small { display: none; }
+  #ab-top { top: 12px; right: 16px; }
   .layout { display: block; }
   aside { position: static; width: auto; max-height: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 12px 16px 0; }
   #cq { position: static; flex: 1 1 100%; border: 1px solid var(--line); border-radius: 16px; padding: 5px 12px; background: var(--card); margin: 0 0 2px; }
@@ -65,11 +66,37 @@ main { flex: 1; min-width: 0; }
 #prev { left: 4px; } #next { right: 4px; }
 #close { position: fixed; top: 10px; right: 18px; font-size: 30px; color: #cbc2b2; cursor: pointer; }
 #close:hover { color: #fff; }
+.ab-link { color: var(--sub); font-size: 13px; cursor: pointer; white-space: nowrap; border-bottom: 1px dashed var(--sub); user-select: none; }
+.ab-link:hover { color: var(--accent); border-color: var(--accent); }
+#ab-top { position: absolute; top: 16px; right: 24px; }
+footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-size: 13px; }
+#ab { position: fixed; inset: 0; background: rgba(10,8,5,.65); display: none; z-index: 120; align-items: center; justify-content: center; padding: 18px; }
+#ab.open { display: flex; }
+.abc { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; max-width: 480px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 24px 26px 28px; position: relative; box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+.abc h2 { font-size: 18px; margin-bottom: 8px; }
+.abx { position: absolute; top: 10px; right: 16px; font-size: 26px; color: var(--sub); cursor: pointer; line-height: 1; }
+.abx:hover { color: var(--ink); }
+.abi { color: var(--sub); font-size: 13.5px; margin-bottom: 6px; }
+.absec { font-size: 14px; font-weight: 600; margin: 14px 0 10px; }
+.abgroup { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 12px 12px; margin-bottom: 12px; }
+.abrow { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.abrow .abqr { flex: 1 1 110px; }
+.abrow2 { display: flex; gap: 12px; flex-wrap: wrap; }
+.abrow2 .abgroup { flex: 1 1 180px; margin-bottom: 0; }
+.abqr { text-align: center; }
+.abqr img, .abpay img { -webkit-touch-callout: default; -webkit-user-drag: auto; user-select: auto; }
+.abqr img { width: 110px; height: 110px; border-radius: 8px; display: block; margin: 0 auto; background: #fff; }
+.abqr b { display: block; font-size: 13px; margin-top: 6px; font-weight: 600; }
+.abqr i { display: block; font-style: normal; font-size: 11px; color: var(--sub); }
+.abd { text-align: center; color: var(--sub); font-size: 12.5px; margin-top: 8px; line-height: 1.5; }
+.abpay { text-align: center; border-top: 1px solid var(--line); margin-top: 16px; padding-top: 2px; }
+.abpay img { width: 132px; border-radius: 8px; margin: 2px auto 0; display: block; }
 </style>
 </head>
 <body>
 <header>
   <h1>中国城市老照片<small>清末民国 · 24 城 2041 张 · 杜克甘博档案 + 维基共享馆藏</small></h1>
+  <span class="ab-link" id="ab-top" onclick="openAb()">关于作者</span>
   <div class="bar">
     <span class="lab">年代</span>
     <span class="chip e on" data-e="全部">全部</span>
@@ -85,6 +112,37 @@ main { flex: 1; min-width: 0; }
 <div class="layout">
   <aside id="cities"><input type="search" id="cq" placeholder="过滤城市…"><div class="city on" data-c="全部"><span>全部</span><span class="n">2041</span></div><div class="city" data-c="beijing"><span>北京</span><span class="n">505</span></div><div class="city" data-c="hangzhou"><span>杭州</span><span class="n">370</span></div><div class="city" data-c="chengdu"><span>成都</span><span class="n">191</span></div><div class="city" data-c="chongqing"><span>重庆</span><span class="n">142</span></div><div class="city" data-c="tianjin"><span>天津</span><span class="n">124</span></div><div class="city" data-c="shanghai"><span>上海</span><span class="n">116</span></div><div class="city" data-c="kaifeng"><span>开封</span><span class="n">68</span></div><div class="city" data-c="nanjing"><span>南京</span><span class="n">68</span></div><div class="city" data-c="guangzhou"><span>广州</span><span class="n">59</span></div><div class="city" data-c="fuzhou"><span>福州</span><span class="n">58</span></div><div class="city" data-c="kunming"><span>昆明</span><span class="n">44</span></div><div class="city" data-c="dalian"><span>大连</span><span class="n">42</span></div><div class="city" data-c="xiamen"><span>厦门</span><span class="n">33</span></div><div class="city" data-c="ningbo"><span>宁波</span><span class="n">31</span></div><div class="city" data-c="hongkong"><span>香港</span><span class="n">29</span></div><div class="city" data-c="jinan"><span>济南</span><span class="n">28</span></div><div class="city" data-c="shenyang"><span>沈阳</span><span class="n">27</span></div><div class="city" data-c="harbin"><span>哈尔滨</span><span class="n">25</span></div><div class="city" data-c="macau"><span>澳门</span><span class="n">21</span></div><div class="city" data-c="qingdao"><span>青岛</span><span class="n">21</span></div><div class="city" data-c="suzhou"><span>苏州</span><span class="n">16</span></div><div class="city" data-c="wuhan"><span>武汉</span><span class="n">15</span></div><div class="city" data-c="taizhou"><span>台州</span><span class="n">5</span></div><div class="city" data-c="xian"><span>西安</span><span class="n">3</span></div></aside>
   <main><div class="grid" id="grid"></div></main>
+</div>
+<footer>图片均来自公有领域馆藏 · <span class="ab-link" onclick="openAb()">关于作者 ☕</span></footer>
+
+<div id="ab">
+  <div class="abc">
+    <span class="abx" id="abclose">&times;</span>
+    <h2>关于作者</h2>
+    <p class="abi">本站收集 1850–1949 年间的中国城市老照片，均来自公有领域馆藏，纯兴趣之作。</p>
+    <div class="absec">作者的其他作品 &#128071;</div>
+    <div class="abgroup">
+      <div class="abrow">
+        <div class="abqr"><img src="assets/gzh_speak.jpg" alt="公众号：公众演讲助手"><b>公众演讲助手</b><i>公众号</i></div>
+        <div class="abqr"><img src="assets/mini_speak.jpg" alt="小程序：头马演讲助手Pro"><b>头马演讲助手Pro</b><i>小程序</i></div>
+      </div>
+      <p class="abd">头马演讲俱乐部入门必备，完整收录最全冠军演讲视频和讲稿</p>
+    </div>
+    <div class="abrow2">
+      <div class="abgroup">
+        <div class="abqr"><img src="assets/gzh_ai.jpg" alt="公众号：AI生菜"><b>AI生菜</b><i>公众号</i></div>
+        <p class="abd">关于AI的日常实践和随机发言</p>
+      </div>
+      <div class="abgroup">
+        <div class="abqr"><img src="assets/game_tank.jpg" alt="小游戏：坦克纵队"><b>坦克纵队</b><i>小游戏</i></div>
+        <p class="abd">经典坦克大战复刻版本</p>
+      </div>
+    </div>
+    <div class="abpay">
+      <div class="absec">觉得本站不错？请作者喝杯咖啡 &#9749;</div>
+      <img src="assets/pay.jpg" alt="微信赞赏码">
+    </div>
+  </div>
 </div>
 
 <div id="top" title="回到顶部">&#8593;</div>
@@ -150,7 +208,12 @@ document.getElementById('prev').onclick = e => { e.stopPropagation(); step(-1); 
 document.getElementById('next').onclick = e => { e.stopPropagation(); step(1); };
 document.getElementById('close').onclick = () => lb.classList.remove('open');
 lb.onclick = e => { if (e.target === lb || e.target.className === 'stage') lb.classList.remove('open'); };
+const ab = document.getElementById('ab');
+function openAb() { ab.classList.add('open'); }
+document.getElementById('abclose').onclick = () => ab.classList.remove('open');
+ab.onclick = e => { if (e.target === ab) ab.classList.remove('open'); };
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && ab.classList.contains('open')) { ab.classList.remove('open'); return; }
   if (!lb.classList.contains('open')) return;
   if (e.key === 'Escape') lb.classList.remove('open');
   if (e.key === 'ArrowLeft') step(-1);
@@ -159,8 +222,8 @@ document.addEventListener('keydown', e => {
 const topBtn = document.getElementById('top');
 topBtn.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
 window.addEventListener('scroll', () => topBtn.classList.toggle('show', window.scrollY > 800), {passive: true});
-document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG' && !e.target.closest('#ab')) e.preventDefault(); });
+document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG' && !e.target.closest('#ab')) e.preventDefault(); });
 document.getElementById('q').addEventListener('input', render);
 document.querySelectorAll('.city').forEach(el => el.onclick = () => {
   document.querySelector('.city.on').classList.remove('on');
