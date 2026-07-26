@@ -126,6 +126,20 @@ html = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>中国城市老照片 · 1850–1949</title>
+<meta name="description" content="__DESC__">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="中国城市老照片">
+<meta property="og:title" content="中国城市老照片 · 1850–1949">
+<meta property="og:description" content="__DESC__">
+<meta property="og:image" content="https://bensonjinbin.github.io/china-old-photos/assets/share.jpg">
+<meta property="og:url" content="https://bensonjinbin.github.io/china-old-photos/">
+<meta itemprop="name" content="中国城市老照片 · 1850–1949">
+<meta itemprop="description" content="__DESC__">
+<meta itemprop="image" content="https://bensonjinbin.github.io/china-old-photos/assets/share.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="中国城市老照片 · 1850–1949">
+<meta name="twitter:description" content="__DESC__">
+<meta name="twitter:image" content="https://bensonjinbin.github.io/china-old-photos/assets/share.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a5b2f'/%3E%3Ctext x='50' y='58' font-size='64' text-anchor='middle' dominant-baseline='middle' fill='%23f5f2ec' font-family='PingFang SC,Hiragino Sans GB,serif'%3E城%3C/text%3E%3C/svg%3E">
 <style>
 :root {
@@ -216,6 +230,7 @@ footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-si
 </style>
 </head>
 <body>
+<img src="assets/share.jpg" alt="" style="display:none">
 <header>
   <h1>中国城市老照片<small>__SUBTITLE__</small></h1>
   <span class="ab-link" id="ab-top" onclick="openAb()">关于作者</span>
@@ -370,8 +385,10 @@ render();
 """
 
 subtitle = f"清末民国 · {len(present)} 城 {len(items)} 张 · 杜克甘博档案 + 维基共享馆藏"
+desc = f"清末民国 {len(present)} 城 {len(items)} 张公有领域老照片，杜克甘博档案 + 维基共享馆藏，可按城市、年代、关键词浏览。"
 html = (html.replace("__DATA__", data_js).replace("__ZH__", zh_js)
-            .replace("__CITY_ROWS__", city_rows).replace("__SUBTITLE__", subtitle))
+            .replace("__CITY_ROWS__", city_rows).replace("__SUBTITLE__", subtitle)
+            .replace("__DESC__", desc))
 open(f"{BASE}/gallery.html", "w").write(html)
 open(f"{BASE}/index.html", "w").write(html)
 print("gallery.html + index.html written:", len(html)//1024, "KB |", len(present), "cities, sidebar layout")
