@@ -206,6 +206,7 @@ main { flex: 1; min-width: 0; }
 .ab-link:hover { color: var(--accent); border-color: var(--accent); }
 #ab-top { position: absolute; top: 16px; right: 24px; }
 footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-size: 13px; }
+#pv { display: none; }
 #ab { position: fixed; inset: 0; background: rgba(10,8,5,.65); display: none; z-index: 120; align-items: center; justify-content: center; padding: 18px; }
 #ab.open { display: flex; }
 .abc { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; max-width: 480px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 24px 26px 28px; position: relative; box-shadow: 0 12px 40px rgba(0,0,0,.35); }
@@ -251,7 +252,7 @@ footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-si
   <aside id="cities"><input type="search" id="cq" placeholder="过滤城市…">__CITY_ROWS__</aside>
   <main><div class="grid" id="grid"></div></main>
 </div>
-<footer>图片均来自公有领域馆藏 · <span class="ab-link" onclick="openAb()">关于作者 ☕</span></footer>
+<footer>图片均来自公有领域馆藏 · <span class="ab-link" onclick="openAb()">关于作者 ☕</span><span id="pv"> · 本站访问量 <span id="pvn"></span></span></footer>
 
 <div id="ab">
   <div class="abc">
@@ -426,6 +427,15 @@ const p0 = applyHash();
 document.getElementById('lucky').onclick = () => {
   if (shown.length) openLb(Math.floor(Math.random() * shown.length));
 };
+fetch('https://jinbin.goatcounter.com/counter/TOTAL.json')
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(d => {
+    const n = parseInt(String(d.count).replace(/[^0-9]/g, ''), 10);
+    if (n) {
+      document.getElementById('pvn').textContent = n.toLocaleString();
+      document.getElementById('pv').style.display = 'inline';
+    }
+  }).catch(() => {});
 render();
 if (!isNaN(p0) && ITEMS[p0]) {
   let idx = shown.indexOf(ITEMS[p0]);
