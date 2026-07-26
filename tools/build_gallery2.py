@@ -212,7 +212,7 @@ footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-si
 .abc h2 { font-size: 18px; margin-bottom: 8px; }
 .abx { position: absolute; top: 10px; right: 16px; font-size: 26px; color: var(--sub); cursor: pointer; line-height: 1; }
 .abx:hover { color: var(--ink); }
-.abi { color: var(--sub); font-size: 13.5px; margin-bottom: 6px; }
+.abi { color: var(--sub); font-size: 13.5px; margin-bottom: 14px; }
 .absec { font-size: 14px; font-weight: 600; margin: 14px 0 10px; }
 .abgroup { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 12px 12px; margin-bottom: 12px; }
 .abrow { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -256,8 +256,7 @@ footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-si
   <div class="abc">
     <span class="abx" id="abclose">&times;</span>
     <h2>关于作者</h2>
-    <p class="abi">本站收集 1850–1949 年间的中国城市老照片，均来自公有领域馆藏，纯兴趣之作。</p>
-    <div class="absec">作者的其他作品 &#128071;</div>
+    <p class="abi">你好，我是本站作者 Benson，一个互联网时代的非遗传承人。业余收集 1850–1949 年间散落在公有领域馆藏里的中国城市老照片，纯属兴趣。平时还捣鼓了下面这些小东西 &#128071;</p>
     <div class="abgroup">
       <div class="abrow">
         <div class="abqr"><img src="assets/gzh_speak.jpg" alt="公众号：公众演讲助手"><b>公众演讲助手</b><i>公众号</i></div>
