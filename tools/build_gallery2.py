@@ -327,23 +327,40 @@ function render() {
       <div class="cap"><div class="t">${it.t}</div><div class="y">${ZH[it.city]} · ${it.y} · ${it.s}</div></div>
     </div>`).join('');
   count.textContent = shown.length + ' / ' + ITEMS.length + ' 张';
+  updateHash();
   window.scrollTo({top: 0});
 }
 
-let cur = 0;
+let cur = 0, showSeq = 0;
 const lb = document.getElementById('lb');
-function openLb(i) { cur = i; show(); lb.classList.add('open'); }
+function openLb(i) { cur = i; lb.classList.add('open'); show(); }
+function closeLb() { lb.classList.remove('open'); updateHash(); }
 function show() {
-  const it = shown[cur];
-  document.getElementById('lbimg').src = enc(it.dir + it.f);
+  const it = shown[cur], seq = ++showSeq;
+  const lbimg = document.getElementById('lbimg');
+  lbimg.src = enc(it.th);
+  const full = new Image();
+  full.onload = () => { if (seq === showSeq) lbimg.src = full.src; };
+  full.src = enc(it.dir + it.f);
+  for (const d of [1, -1]) {
+    const n = shown[(cur + d + shown.length) % shown.length];
+    if (n && n !== it) (new Image()).src = enc(n.dir + n.f);
+  }
   document.getElementById('lbinfo').innerHTML =
     `${ZH[it.city]} · ${it.t} &nbsp;·&nbsp; ${it.y} &nbsp;·&nbsp; ${it.lic} &nbsp;·&nbsp; <a href="${it.src}" target="_blank">馆藏来源</a> &nbsp;(${cur + 1}/${shown.length})`;
+  updateHash();
 }
 function step(d) { cur = (cur + d + shown.length) % shown.length; show(); }
+let tX = 0, tY = 0;
+lb.addEventListener('touchstart', e => { tX = e.touches[0].clientX; tY = e.touches[0].clientY; }, {passive: true});
+lb.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tX, dy = e.changedTouches[0].clientY - tY;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 2) step(dx < 0 ? 1 : -1);
+}, {passive: true});
 document.getElementById('prev').onclick = e => { e.stopPropagation(); step(-1); };
 document.getElementById('next').onclick = e => { e.stopPropagation(); step(1); };
-document.getElementById('close').onclick = () => lb.classList.remove('open');
-lb.onclick = e => { if (e.target === lb || e.target.className === 'stage') lb.classList.remove('open'); };
+document.getElementById('close').onclick = closeLb;
+lb.onclick = e => { if (e.target === lb || e.target.className === 'stage') closeLb(); };
 const ab = document.getElementById('ab');
 function openAb() { ab.classList.add('open'); }
 document.getElementById('abclose').onclick = () => ab.classList.remove('open');
@@ -351,7 +368,7 @@ ab.onclick = e => { if (e.target === ab) ab.classList.remove('open'); };
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && ab.classList.contains('open')) { ab.classList.remove('open'); return; }
   if (!lb.classList.contains('open')) return;
-  if (e.key === 'Escape') lb.classList.remove('open');
+  if (e.key === 'Escape') closeLb();
   if (e.key === 'ArrowLeft') step(-1);
   if (e.key === 'ArrowRight') step(1);
 });
@@ -377,7 +394,48 @@ document.querySelectorAll('.chip.e').forEach(ch => ch.onclick = () => {
   document.querySelector('.chip.e.on').classList.remove('on');
   ch.classList.add('on'); render();
 });
+
+function updateHash() {
+  const p = new URLSearchParams();
+  const c = document.querySelector('.city.on').dataset.c;
+  const e = document.querySelector('.chip.e.on').dataset.e;
+  const q = document.getElementById('q').value.trim();
+  if (c !== '全部') p.set('c', c);
+  if (e !== '全部') p.set('e', e);
+  if (q) p.set('q', q);
+  if (lb.classList.contains('open') && shown[cur]) p.set('p', ITEMS.indexOf(shown[cur]));
+  const s = p.toString();
+  history.replaceState(null, '', s ? '#' + s : location.pathname + location.search);
+}
+function applyHash() {
+  const h = new URLSearchParams(location.hash.slice(1));
+  const c = h.get('c'), e = h.get('e'), q = h.get('q');
+  if (c) {
+    const el = document.querySelector('.city[data-c="' + c + '"]');
+    if (el) { document.querySelector('.city.on').classList.remove('on'); el.classList.add('on'); }
+  }
+  if (e) {
+    const el = document.querySelector('.chip.e[data-e="' + e + '"]');
+    if (el) { document.querySelector('.chip.e.on').classList.remove('on'); el.classList.add('on'); }
+  }
+  if (q) document.getElementById('q').value = q;
+  return parseInt(h.get('p'));
+}
+const p0 = applyHash();
 render();
+if (!isNaN(p0) && ITEMS[p0]) {
+  let idx = shown.indexOf(ITEMS[p0]);
+  if (idx < 0) {
+    document.querySelector('.city.on').classList.remove('on');
+    document.querySelector('.city[data-c="全部"]').classList.add('on');
+    document.querySelector('.chip.e.on').classList.remove('on');
+    document.querySelector('.chip.e[data-e="全部"]').classList.add('on');
+    document.getElementById('q').value = '';
+    render();
+    idx = shown.indexOf(ITEMS[p0]);
+  }
+  if (idx >= 0) openLb(idx);
+}
 </script>
 </body>
 </html>
