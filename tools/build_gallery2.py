@@ -188,7 +188,7 @@ input[type=search] { flex: 1 1 180px; max-width: 300px; padding: 5px 12px; borde
 input[type=search]:focus { border-color: var(--accent); }
 .chip { padding: 4px 12px; border: 1px solid var(--line); border-radius: 20px; background: var(--card); color: var(--sub); font-size: 13px; cursor: pointer; user-select: none; white-space: nowrap; }
 .chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
-.count { color: var(--sub); font-size: 13px; margin-left: auto; }
+.count { color: var(--sub); font-size: 13px; margin-left: auto; white-space: nowrap; }
 .layout { display: flex; align-items: flex-start; }
 aside { width: 170px; flex-shrink: 0; position: sticky; top: var(--hd); max-height: calc(100vh - var(--hd)); overflow-y: auto; padding: 0 8px 40px 16px; }
 #cq { position: sticky; top: 0; z-index: 2; width: 100%; margin: 0 0 8px; padding: 14px 12px 6px; border: none; border-bottom: 1px solid var(--line); background: var(--bg); color: var(--ink); font-size: 13px; outline: none; }
@@ -234,7 +234,8 @@ main { flex: 1; min-width: 0; }
 .ab-link:hover { color: var(--accent); border-color: var(--accent); }
 #ab-top { position: absolute; top: 16px; right: 24px; }
 footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-size: 13px; }
-#pv { display: none; }
+.pv { display: none; }
+.pv.on { display: inline; }
 #ab { position: fixed; inset: 0; background: rgba(10,8,5,.65); display: none; z-index: 120; align-items: center; justify-content: center; padding: 18px; }
 #ab.open { display: flex; }
 .abc { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; max-width: 480px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 24px 26px 28px; position: relative; box-shadow: 0 12px 40px rgba(0,0,0,.35); }
@@ -286,7 +287,7 @@ footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-si
   <aside id="cities"><input type="search" id="cq" placeholder="过滤城市…">__CITY_ROWS__</aside>
   <main><div class="grid" id="grid"></div></main>
 </div>
-<footer>图片均来自公有领域馆藏 · <span class="ab-link" onclick="openAb()">关于作者 ☕</span><span id="pv"> · 本站访问量 <span id="pvn"></span></span></footer>
+<footer>图片均来自公有领域馆藏 · <span class="ab-link" onclick="openAb()">关于作者 ☕</span><span class="pv"> · 本站访问量 <span class="pvn"></span></span></footer>
 
 <div id="ab">
   <div class="abc">
@@ -362,7 +363,10 @@ function render() {
       <img src="${enc(it.th)}" loading="lazy" alt="">
       <div class="cap"><div class="t">${it.tz || it.t}</div><div class="y">${ZH[it.city]} · ${it.y} · ${it.s}</div></div>
     </div>`).join('');
-  count.textContent = shown.length + ' / ' + ITEMS.length + ' 张';
+  const filtered = c !== '全部' || e !== '全部' || !!q;
+  count.textContent = filtered
+    ? '筛出 ' + shown.length + ' 张 · 共 ' + ITEMS.length + ' 张'
+    : '共 ' + ITEMS.length + ' 张';
   updateHash();
   window.scrollTo({top: 0});
 }
@@ -466,8 +470,9 @@ fetch('https://jinbin.goatcounter.com/counter/TOTAL.json')
   .then(d => {
     const n = parseInt(String(d.count_unique || d.count).replace(/[^0-9]/g, ''), 10);
     if (n) {
-      document.getElementById('pvn').textContent = n.toLocaleString();
-      document.getElementById('pv').style.display = 'inline';
+      const t = n.toLocaleString();
+      document.querySelectorAll('.pvn').forEach(el => { el.textContent = t; });
+      document.querySelectorAll('.pv').forEach(el => { el.classList.add('on'); });
     }
   }).catch(() => {});
 render();
