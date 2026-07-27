@@ -256,6 +256,12 @@ footer { text-align: center; padding: 20px 16px 44px; color: var(--sub); font-si
 .abd { text-align: center; color: var(--sub); font-size: 12.5px; margin-top: 8px; line-height: 1.5; }
 .abpay { text-align: center; border-top: 1px solid var(--line); margin-top: 16px; padding-top: 2px; }
 .abpay img { width: 132px; border-radius: 8px; margin: 2px auto 0; display: block; }
+@media (max-width: 480px) {
+  .abc { padding: 22px 16px 26px; }
+  .abrow2 { gap: 6px; flex-wrap: nowrap; }
+  .abrow2 .abgroup { padding: 10px 6px 8px; }
+  .abrow2 .abqr img { width: 88px; height: 88px; }
+}
 </style>
 </head>
 <body>

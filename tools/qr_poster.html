@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  background: #f5f2ec;
+  font-family: "Songti SC", "Noto Serif SC", "PingFang SC", serif;
+  color: #2b2620;
+  display: flex; flex-direction: column;
+  padding: 52px 56px 44px;
+}
+.head { text-align: center; }
+.seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; border-radius: 14px; background: #9a5b2f;
+  color: #f5f2ec; font-size: 40px; font-weight: 700; margin-bottom: 16px;
+}
+h1 { font-size: 58px; font-weight: 900; letter-spacing: .1em; }
+.sub {
+  margin-top: 12px; font-size: 25px; color: #8a8074; letter-spacing: .06em;
+  font-family: "PingFang SC", sans-serif;
+}
+.grid {
+  flex: 1; min-height: 0; margin-top: 30px;
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px;
+}
+.cell {
+  position: relative; min-height: 0; min-width: 0; border-radius: 12px; overflow: hidden;
+  border: 1px solid #e3ddd2; background: #d8d2c6;
+}
+.cell img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; filter: sepia(.10);
+}
+.tag {
+  position: absolute; left: 12px; bottom: 12px;
+  background: rgba(43,38,32,.72); color: #f5f2ec;
+  font-size: 22px; padding: 4px 16px; border-radius: 17px;
+  font-family: "PingFang SC", sans-serif; letter-spacing: .05em;
+}
+.foot {
+  margin-top: 28px; background: #fff; border: 1px solid #e3ddd2;
+  border-radius: 24px; padding: 26px 38px;
+  display: flex; align-items: center; gap: 40px;
+  box-shadow: 0 14px 40px rgba(43,38,32,.08);
+}
+.qrbox { position: relative; flex-shrink: 0; }
+.qrbox img.qr { display: block; width: 250px; height: 250px; }
+.logo {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 56px; height: 56px; border-radius: 13px; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.logo .s {
+  width: 46px; height: 46px; border-radius: 10px; background: #9a5b2f;
+  color: #f5f2ec; font-size: 28px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.ft { flex: 1; min-width: 0; }
+.slogan { font-size: 40px; font-weight: 900; letter-spacing: .18em; }
+.hint {
+  margin-top: 14px; font-size: 21px; color: #8a8074; letter-spacing: .03em;
+  line-height: 1.7; font-family: "PingFang SC", sans-serif;
+}
+.url {
+  display: inline-block; margin-top: 16px; background: #9a5b2f; color: #f5f2ec;
+  font-size: 22px; padding: 9px 26px; border-radius: 24px; letter-spacing: .02em;
+  font-family: "PingFang SC", sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="head">
+  <div class="seal">城</div>
+  <h1>中国城市老照片</h1>
+  <div class="sub">1850–1949 · 清末民国 · 24 城 2000+ 张公有领域馆藏</div>
+</div>
+<div class="grid">
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/beijing/gamble/gamble_044B_0462_Forbidden_City_Gate.jpg" style="transform:scale(1.08)"><span class="tag">北京 · 紫禁城</span></div>
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/shanghai/wiki/16_Nanking_Road_Shanghai_c_1930s.jpg"><span class="tag">上海 · 南京路</span></div>
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/hangzhou/wiki/04_雷峰塔_1920年代_倒塌前.jpg"><span class="tag">杭州 · 雷峰塔</span></div>
+  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/hongkong/wiki/06_HK_JunksSampans_c1900s.jpg"><span class="tag">香港 · 维多利亚港</span></div>
+</div>
+<div class="foot">
+  <div class="qrbox">
+    <img class="qr" src="file:///Users/jinbin/Documents/codeup/china-old-photos/assets/qrcode.svg">
+    <div class="logo"><div class="s">城</div></div>
+  </div>
+  <div class="ft">
+    <div class="slogan">扫码穿越百年</div>
+    <div class="hint">长按识别二维码，按城市 · 年代 · 关键词浏览<br>杜克甘博档案 + 维基共享馆藏</div>
+    <div class="url">bensonjinbin.github.io/china-old-photos</div>
+  </div>
+</div>
+</body>
+</html>
