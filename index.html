@@ -193,6 +193,8 @@ const grid = document.getElementById('grid'), count = document.getElementById('c
 let shown = [];
 
 function enc(p) { return p.split('/').map(encodeURIComponent).join('/'); }
+// alt 是属性，标题里有 11 条带双引号、143 条带 &，不转义会把属性提前截断
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 function render() {
   const q = document.getElementById('q').value.trim().toLowerCase();
@@ -212,7 +214,7 @@ function render() {
   });
   grid.innerHTML = shown.map((it, i) => `
     <div class="card" onclick="openLb(${i})">
-      <img src="${enc(it.th)}" loading="lazy" alt="">
+      <img src="${enc(it.th)}" loading="lazy" alt="${esc(it.tz || it.t)}">
       <div class="cap"><div class="t">${it.tz || it.t}</div><div class="y">${ZH[it.city]} · ${it.y} · ${it.s}</div></div>
     </div>`).join('');
   const filtered = c !== '全部' || e !== '全部' || !!q;
@@ -230,6 +232,7 @@ function closeLb() { lb.classList.remove('open'); updateHash(); }
 function show() {
   const it = shown[cur], seq = ++showSeq;
   const lbimg = document.getElementById('lbimg');
+  lbimg.alt = it.tz || it.t;   // 走属性赋值，不用转义
   lbimg.src = enc(it.th);
   const full = new Image();
   full.onload = () => { if (seq === showSeq) lbimg.src = full.src; };
