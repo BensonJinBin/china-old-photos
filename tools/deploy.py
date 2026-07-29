@@ -96,8 +96,12 @@ def deploy_cf(msg, count, oversize):
                         "--project-name", CF_PROJECT, "--branch", CF_BRANCH,
                         "--commit-dirty=true", "--commit-message", msg], cwd=CACHE)
     if r.returncode != 0:
-        sys.exit(f"wrangler pages deploy 失败（exit {r.returncode}）。"
-                 f"首次使用需先 `npx wrangler login`，或设 CLOUDFLARE_API_TOKEN。")
+        sys.exit(
+            f"wrangler pages deploy 失败（exit {r.returncode}）。原因见 wrangler 日志：\n"
+            f"  ls -t ~/Library/Preferences/.wrangler/logs/*.log | head -1\n"
+            f"常见两类：未登录（先 `npx wrangler login` 或设 CLOUDFLARE_API_TOKEN）；\n"
+            f"网络超时（UND_ERR_HEADERS_TIMEOUT）——直接重跑即可，已上传的资源按 hash 留在\n"
+            f"项目里，重试只补没传上去的那部分。")
     print(f"deployed to Cloudflare Pages: {CF_PROJECT} / {CF_BRANCH} ({msg})")
 
 
@@ -179,7 +183,9 @@ def main():
             count += 1
             if size > CF_MAX_FILE:
                 oversize.append((os.path.relpath(os.path.join(dp, f), STAGE), size))
-    print(f"stage: {shrunk} shrunk + {copied} as-is = {total/1e9:.2f} GB, {count} files")
+    # flush：管道里 python 是块缓冲，不刷的话这行会排到 wrangler 的输出后面
+    print(f"stage: {shrunk} shrunk + {copied} as-is = {total/1e9:.2f} GB, {count} files",
+          flush=True)
 
     # 4. publish
     if "gh" in targets:
