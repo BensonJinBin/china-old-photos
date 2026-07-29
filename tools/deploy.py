@@ -90,9 +90,11 @@ def deploy_cf(msg, count, oversize):
         sys.exit(f"发布树 {count} 个文件，超过免费版 {CF_MAX_FILES} 上限。")
     if not shutil.which("npx"):
         sys.exit("找不到 npx，先装 Node.js（或全局装 wrangler 后改用 wrangler 命令）。")
+    # cwd 用 CACHE 而不是 STAGE：wrangler 会在 cwd 下写 .wrangler/ 本地状态目录，
+    # 落在发布树里就成了要上传的内容。也不能用仓库根，那会把工作区弄脏。
     r = subprocess.run(["npx", "--yes", "wrangler@latest", "pages", "deploy", STAGE,
                         "--project-name", CF_PROJECT, "--branch", CF_BRANCH,
-                        "--commit-dirty=true", "--commit-message", msg], cwd=STAGE)
+                        "--commit-dirty=true", "--commit-message", msg], cwd=CACHE)
     if r.returncode != 0:
         sys.exit(f"wrangler pages deploy 失败（exit {r.returncode}）。"
                  f"首次使用需先 `npx wrangler login`，或设 CLOUDFLARE_API_TOKEN。")
