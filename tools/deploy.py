@@ -1,9 +1,24 @@
 #!/usr/bin/env python3
-"""Build the compressed publish tree from main HEAD and push it to gh-pages.
+"""Build the compressed publish tree from main HEAD and publish it.
 
 gh-pages 不是 main 的镜像：馆藏原图（<city>/wiki|gamble/）长边压到 1200px，
 其余文件原样。压缩结果缓存在 ~/.cache/china-old-photos-deploy，只压新增/变动的图。
-用法: python3 tools/deploy.py ["提交信息"]
+
+用法:
+  python3 tools/deploy.py ["提交信息"]          # 发 GitHub Pages（gh-pages 分支），默认
+  python3 tools/deploy.py --cf ["提交信息"]     # 发 Cloudflare Pages（wrangler 直传发布树）
+  python3 tools/deploy.py --both ["提交信息"]   # 两边都发
+
+主站是 https://laozhaopian.pages.dev/ 。Cloudflare 直传不走构建容器、不用 clone 仓库，
+wrangler 按内容 hash 去重，第二次起只上传新增/变动的图。项目名和分支可用环境变量覆盖：
+  CF_PAGES_PROJECT=laozhaopian  CF_PAGES_BRANCH=main
+
+首次准备（一次性，production-branch 必须和 CF_PAGES_BRANCH 一致，
+否则每次直传都会落到 preview 而不是正式域名）:
+  npx wrangler login
+  npx wrangler pages project create laozhaopian --production-branch main
+Pages 项目名不能改，它就是 pages.dev 子域；换名字只能新建项目重新全量上传。
+换域名后记得重新生成页面里的 canonical / og 绝对地址（见 build_gallery2.py 的 SITE_URL）。
 """
 import json, os, re, shutil, subprocess, sys, tempfile
 
@@ -14,6 +29,11 @@ STAGE = os.path.join(CACHE, "stage")
 MANIFEST = os.path.join(CACHE, "manifest.json")
 MAXDIM = 1200
 PHOTO_RE = re.compile(r"^[a-z]+/(wiki|gamble)/.+\.(jpe?g|png)$", re.I)
+
+CF_PROJECT = os.environ.get("CF_PAGES_PROJECT", "laozhaopian")
+CF_BRANCH = os.environ.get("CF_PAGES_BRANCH", "main")
+CF_MAX_FILE = 25 * 1024 * 1024   # 单文件 25 MiB 上限
+CF_MAX_FILES = 20_000            # 免费版单站文件数上限
 
 
 def git(*args, env=None, cwd=BASE):
@@ -43,8 +63,55 @@ def probe_dims(paths):
     return dims
 
 
+def push_gh_pages(msg):
+    """临时 index 写树，commit-tree 挂到 origin/gh-pages 上再推。全程不碰工作区。"""
+    git("fetch", "origin", "gh-pages")
+    idx = tempfile.mktemp(prefix="deploy-index-")
+    env = {**os.environ, "GIT_INDEX_FILE": idx, "GIT_WORK_TREE": STAGE,
+           "GIT_DIR": os.path.join(BASE, ".git")}
+    try:
+        git("add", "-A", ".", env=env, cwd=STAGE)
+        tree = git("write-tree", env=env, cwd=STAGE)
+    finally:
+        if os.path.exists(idx):
+            os.remove(idx)
+    parent = git("rev-parse", "origin/gh-pages")
+    commit = git("commit-tree", tree, "-p", parent, "-m", msg)
+    git("push", "origin", f"{commit}:refs/heads/gh-pages")
+    print(f"pushed gh-pages {commit[:9]} ({msg})")
+
+
+def deploy_cf(msg, count, oversize):
+    """wrangler 直传发布树到 Cloudflare Pages。"""
+    if oversize:
+        sys.exit("以下文件超过 Cloudflare Pages 单文件 25 MiB 上限，压缩后再发：\n  " +
+                 "\n  ".join(f"{r} ({s/1024/1024:.1f} MB)" for r, s in oversize))
+    if count > CF_MAX_FILES:
+        sys.exit(f"发布树 {count} 个文件，超过免费版 {CF_MAX_FILES} 上限。")
+    if not shutil.which("npx"):
+        sys.exit("找不到 npx，先装 Node.js（或全局装 wrangler 后改用 wrangler 命令）。")
+    r = subprocess.run(["npx", "--yes", "wrangler@latest", "pages", "deploy", STAGE,
+                        "--project-name", CF_PROJECT, "--branch", CF_BRANCH,
+                        "--commit-dirty=true", "--commit-message", msg], cwd=STAGE)
+    if r.returncode != 0:
+        sys.exit(f"wrangler pages deploy 失败（exit {r.returncode}）。"
+                 f"首次使用需先 `npx wrangler login`，或设 CLOUDFLARE_API_TOKEN。")
+    print(f"deployed to Cloudflare Pages: {CF_PROJECT} / {CF_BRANCH} ({msg})")
+
+
 def main():
-    msg = sys.argv[1] if len(sys.argv) > 1 else f"deploy: {git('rev-parse', '--short', 'main')} 压缩发布"
+    flags = {a for a in sys.argv[1:] if a.startswith("--")}
+    rest = [a for a in sys.argv[1:] if not a.startswith("--")]
+    unknown = flags - {"--cf", "--gh", "--both"}
+    if unknown:
+        sys.exit(f"未知参数: {' '.join(sorted(unknown))}\n{__doc__}")
+    targets = set()
+    if flags & {"--cf", "--both"}:
+        targets.add("cf")
+    if flags & {"--gh", "--both"} or not targets:
+        targets.add("gh")
+
+    msg = rest[0] if rest else f"deploy: {git('rev-parse', '--short', 'main')} 压缩发布"
     if git("status", "--porcelain"):
         sys.exit("工作区不干净，先提交或还原后再部署。")
 
@@ -101,25 +168,22 @@ def main():
         dst = os.path.join(STAGE, rel)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         subprocess.run(["cp", "-c", src, dst], check=True)
-    total = sum(os.path.getsize(os.path.join(dp, f))
-                for dp, _, fs in os.walk(STAGE) for f in fs)
-    print(f"stage: {shrunk} shrunk + {copied} as-is = {total/1e9:.2f} GB")
+    total = count = 0
+    oversize = []
+    for dp, _, fs in os.walk(STAGE):
+        for f in fs:
+            size = os.path.getsize(os.path.join(dp, f))
+            total += size
+            count += 1
+            if size > CF_MAX_FILE:
+                oversize.append((os.path.relpath(os.path.join(dp, f), STAGE), size))
+    print(f"stage: {shrunk} shrunk + {copied} as-is = {total/1e9:.2f} GB, {count} files")
 
-    # 4. write tree via temp index, commit on top of gh-pages, push
-    git("fetch", "origin", "gh-pages")
-    idx = tempfile.mktemp(prefix="deploy-index-")
-    env = {**os.environ, "GIT_INDEX_FILE": idx, "GIT_WORK_TREE": STAGE,
-           "GIT_DIR": os.path.join(BASE, ".git")}
-    try:
-        git("add", "-A", ".", env=env, cwd=STAGE)
-        tree = git("write-tree", env=env, cwd=STAGE)
-    finally:
-        if os.path.exists(idx):
-            os.remove(idx)
-    parent = git("rev-parse", "origin/gh-pages")
-    commit = git("commit-tree", tree, "-p", parent, "-m", msg)
-    git("push", "origin", f"{commit}:refs/heads/gh-pages")
-    print(f"pushed gh-pages {commit[:9]} ({msg})")
+    # 4. publish
+    if "gh" in targets:
+        push_gh_pages(msg)
+    if "cf" in targets:
+        deploy_cf(msg, count, sorted(oversize, key=lambda x: -x[1]))
 
 
 if __name__ == "__main__":

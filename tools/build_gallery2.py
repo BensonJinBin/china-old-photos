@@ -5,6 +5,19 @@ import json, os, re, subprocess
 SCRATCH = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.dirname(SCRATCH)
 
+# 站点根 URL：用于 canonical、og/twitter 绝对地址、404 页回首页链接（页面内资源全是相对路径）。
+# canonical 尤其重要——Cloudflare Pages 关不掉 preview 域名（<hash>.laozhaopian.pages.dev），
+# 靠 canonical 才不会和主站打成重复内容。
+# 换域名时用环境变量覆盖，例如回退到 GitHub Pages：
+#   SITE_URL=https://bensonjinbin.github.io/china-old-photos/ python3 tools/build_gallery2.py
+SITE_URL = os.environ.get("SITE_URL", "https://laozhaopian.pages.dev/").rstrip("/") + "/"
+
+# 「城」字印章 favicon，图集页和 404 页共用
+FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'"
+           "%3E%3Crect width='100' height='100' rx='20' fill='%239a5b2f'/%3E%3Ctext x='50' y='58'"
+           " font-size='64' text-anchor='middle' dominant-baseline='middle' fill='%23f5f2ec'"
+           " font-family='PingFang SC,Hiragino Sans GB,serif'%3E城%3C/text%3E%3C/svg%3E")
+
 CITY_ZH = {"hangzhou":"杭州","beijing":"北京","chengdu":"成都","chongqing":"重庆",
   "tianjin":"天津","shanghai":"上海","kaifeng":"开封","nanjing":"南京",
   "guangzhou":"广州","fuzhou":"福州","macau":"澳门","suzhou":"苏州","wuhan":"武汉",
@@ -154,20 +167,21 @@ html = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>中国城市老照片 · 1850–1949</title>
 <meta name="description" content="__DESC__">
+<link rel="canonical" href="__SITE__">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="中国城市老照片">
 <meta property="og:title" content="中国城市老照片 · 1850–1949">
 <meta property="og:description" content="__DESC__">
-<meta property="og:image" content="https://bensonjinbin.github.io/china-old-photos/assets/share.jpg">
-<meta property="og:url" content="https://bensonjinbin.github.io/china-old-photos/">
+<meta property="og:image" content="__SITE__assets/share.jpg">
+<meta property="og:url" content="__SITE__">
 <meta itemprop="name" content="中国城市老照片 · 1850–1949">
 <meta itemprop="description" content="__DESC__">
-<meta itemprop="image" content="https://bensonjinbin.github.io/china-old-photos/assets/share.jpg">
+<meta itemprop="image" content="__SITE__assets/share.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中国城市老照片 · 1850–1949">
 <meta name="twitter:description" content="__DESC__">
-<meta name="twitter:image" content="https://bensonjinbin.github.io/china-old-photos/assets/share.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a5b2f'/%3E%3Ctext x='50' y='58' font-size='64' text-anchor='middle' dominant-baseline='middle' fill='%23f5f2ec' font-family='PingFang SC,Hiragino Sans GB,serif'%3E城%3C/text%3E%3C/svg%3E">
+<meta name="twitter:image" content="__SITE__assets/share.jpg">
+<link rel="icon" href="__FAVICON__">
 <style>
 :root {
   --bg: #f5f2ec; --card: #fff; --ink: #2b2620; --sub: #8a8074;
@@ -499,7 +513,59 @@ subtitle = f"清末民国 · {len(present)} 城 {len(items)} 张 · 杜克甘博
 desc = f"清末民国 {len(present)} 城 {len(items)} 张公有领域老照片，杜克甘博档案 + 维基共享馆藏，可按城市、年代、关键词浏览。"
 html = (html.replace("__DATA__", data_js).replace("__ZH__", zh_js)
             .replace("__CITY_ROWS__", city_rows).replace("__SUBTITLE__", subtitle)
-            .replace("__DESC__", desc))
+            .replace("__DESC__", desc).replace("__SITE__", SITE_URL)
+            .replace("__FAVICON__", FAVICON))
 open(f"{BASE}/gallery.html", "w").write(html)
 open(f"{BASE}/index.html", "w").write(html)
 print("gallery.html + index.html written:", len(html)//1024, "KB |", len(present), "cities, sidebar layout")
+
+# 9. _headers — Cloudflare Pages 的缓存策略（GitHub Pages 忽略此文件，留着无害）。
+#    馆藏图和缩略图文件名一经收录就不再变，按 immutable 长缓存；HTML 每次回源校验。
+#    CF 上限 100 条规则，这里约 30 条。
+IMMUTABLE = "  Cache-Control: public, max-age=31536000, immutable"
+REVALIDATE = "  Cache-Control: public, max-age=0, must-revalidate"
+hdr = ["# 由 tools/build_gallery2.py 生成，勿手改", ""]
+for pat in ["/thumbs/*", "/assets/*"] + [f"/{c}/*" for c in sorted(CITY_ZH)]:
+    hdr += [pat, IMMUTABLE, ""]
+for pat in ["/", "/index.html", "/gallery.html", "/404.html"]:
+    hdr += [pat, REVALIDATE, ""]
+open(f"{BASE}/_headers", "w").write("\n".join(hdr))
+
+# 10. 404.html — GitHub Pages 与 Cloudflare Pages 都会自动用它兜底。
+#     回首页链接走 SITE_URL 绝对地址：404 可能发生在任意深度的路径上，相对链接不可靠。
+page404 = """<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>找不到这张照片 · 中国城市老照片</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="__FAVICON__">
+<style>
+:root { --bg: #f5f2ec; --ink: #2b2620; --sub: #8a8074; --accent: #9a5b2f; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #17150f; --ink: #ece5d8; --sub: #9a9184; --accent: #d09758; }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; padding: 40px 24px; text-align: center;
+  font: 15px/1.7 -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif; }
+.n { font-size: 64px; font-weight: 700; letter-spacing: .06em; color: var(--accent); }
+h1 { font-size: 19px; font-weight: 700; letter-spacing: .04em; }
+p { color: var(--sub); font-size: 14px; max-width: 30em; }
+a { display: inline-block; margin-top: 8px; color: var(--accent);
+  text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+</style>
+</head>
+<body>
+<div class="n">404</div>
+<h1>这条路上没有照片</h1>
+<p>地址可能拼错了，或者这张照片已经从图集里挪走。</p>
+<a href="__SITE__">回到图集首页 &rsaquo;</a>
+</body>
+</html>
+"""
+open(f"{BASE}/404.html", "w").write(
+    page404.replace("__FAVICON__", FAVICON).replace("__SITE__", SITE_URL))
+print(f"_headers ({len(hdr)//3} rules) + 404.html written | SITE_URL={SITE_URL}")

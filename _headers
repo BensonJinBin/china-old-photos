@@ -1,0 +1,91 @@
+# 由 tools/build_gallery2.py 生成，勿手改
+
+/thumbs/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/beijing/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/chengdu/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/chongqing/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/dalian/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fuzhou/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/guangzhou/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/hangzhou/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/harbin/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/hongkong/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/jinan/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/kaifeng/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/kunming/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/macau/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/nanjing/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/ningbo/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/qingdao/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/shanghai/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/shenyang/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/suzhou/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/taizhou/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/tianjin/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/wuhan/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/xiamen/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/xian/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/gallery.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/404.html
+  Cache-Control: public, max-age=0, must-revalidate
