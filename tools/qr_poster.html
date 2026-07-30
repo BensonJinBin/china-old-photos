@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<!--
+  宣传海报模板 → assets/qr-poster.png（1080x1440 @2x = 2160x2880）。
+
+  重截步骤（改完文案或换了二维码就得重截，否则海报里还是旧的）:
+    1. 二维码先重生成: uv run --with segno --with pillow python3 tools/gen_qr.py
+    2. 本文件用浏览器按 1080x1440 视口、deviceScaleFactor=2 截全页存成 assets/qr-poster.png
+    3. 回读校验海报里的码扫出来是不是当前 SITE_URL
+
+  资源路径一律用相对地址（本文件在 tools/ 下，所以是 ../）。别写 file:///Users/... 绝对路径，
+  换机器或换目录后就全成空框了。下方 .url 文案要和 build_gallery2.py 的 SITE_URL 保持一致。
+-->
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -79,20 +90,20 @@ h1 { font-size: 58px; font-weight: 900; letter-spacing: .1em; }
   <div class="sub">1850–1949 · 清末民国 · 24 城 2000+ 张公有领域馆藏</div>
 </div>
 <div class="grid">
-  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/beijing/gamble/gamble_044B_0462_Forbidden_City_Gate.jpg" style="transform:scale(1.08)"><span class="tag">北京 · 紫禁城</span></div>
-  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/shanghai/wiki/16_Nanking_Road_Shanghai_c_1930s.jpg"><span class="tag">上海 · 南京路</span></div>
-  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/hangzhou/wiki/04_雷峰塔_1920年代_倒塌前.jpg"><span class="tag">杭州 · 雷峰塔</span></div>
-  <div class="cell"><img src="file:///Users/jinbin/Documents/codeup/china-old-photos/hongkong/wiki/06_HK_JunksSampans_c1900s.jpg"><span class="tag">香港 · 维多利亚港</span></div>
+  <div class="cell"><img src="../beijing/gamble/gamble_044B_0462_Forbidden_City_Gate.jpg" style="transform:scale(1.08)"><span class="tag">北京 · 紫禁城</span></div>
+  <div class="cell"><img src="../shanghai/wiki/16_Nanking_Road_Shanghai_c_1930s.jpg"><span class="tag">上海 · 南京路</span></div>
+  <div class="cell"><img src="../hangzhou/wiki/04_雷峰塔_1920年代_倒塌前.jpg"><span class="tag">杭州 · 雷峰塔</span></div>
+  <div class="cell"><img src="../hongkong/wiki/06_HK_JunksSampans_c1900s.jpg"><span class="tag">香港 · 维多利亚港</span></div>
 </div>
 <div class="foot">
   <div class="qrbox">
-    <img class="qr" src="file:///Users/jinbin/Documents/codeup/china-old-photos/assets/qrcode.svg">
+    <img class="qr" src="../assets/qrcode.svg">
     <div class="logo"><div class="s">城</div></div>
   </div>
   <div class="ft">
     <div class="slogan">扫码穿越百年</div>
     <div class="hint">长按识别二维码，按城市 · 年代 · 关键词浏览<br>杜克甘博档案 + 维基共享馆藏</div>
-    <div class="url">bensonjinbin.github.io/china-old-photos</div>
+    <div class="url">laozhaopian.pages.dev</div>
   </div>
 </div>
 </body>
